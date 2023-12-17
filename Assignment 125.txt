@@ -1,0 +1,197 @@
+1. show columns in Salespeople;
+
+2. select * from Customers where RATING = 100;
+
+3. select * from Customers where CITY = NULL;
+
+4. select SNUM, max(AMT) from (select Salespeople.SNUM, AMT from Salespeople join Orders where Salespeople.SNUM = Orders.SNUM) as Highest_Order group by SNUM;
+
+5. select * from Orders order by CNUM desc;
+
+6. select * from Salespeople join Orders on Salespeople.SNUM = Orders.SNUM;
+
+7. select CNAME from Salespeople join Customers where Salespeople.SNUM = Customers.SNUM;
+
+8. 
+
+9. select Salespeople.SNUM, count(ONUM) from Salespeople join Orders where Salespeople.SNUM = Orders.SNUM group by Salespeople.SNUM order by count(ONUM) desc;
+
+10. select * from Customers where exists(select 1 from Customers where CITY = 'San Jose');
+
+11. select * from Salespeople s join Customers c where s.SNUM = c.SNUM and s.CITY = c.CITY;
+
+12. select sc.SNUM, max(AMT) from (select s.SNUM, SNAME, AMT from Salespeople s join Orders o where s.SNUM = o.SNUM) sc group by sc.SNUM;
+
+13. select * from Customers where CITY = 'San Jose' and RATING >= 200;
+
+14. select SNAME, COMM from Salespeople where CITY = 'London';
+
+15. select * from Salespeople s join Orders o where s.SNUM = o.SNUM and SNAME =
+'Motika';
+
+16. select * from Customers c join Orders o where c.CNUM = o.CNUM and ODATE = '1996-03-10';
+
+17. select ODATE, sum(AMT) from Orders o group by ODATE having sum(AMT) > max(AMT)+2000;
+
+18. select * from Orders o1 where (select 1 from Orders o2 where ODATE = '1996-06-10' and o1.AMT>o2.AMT) and o1.ODATE<>'1996-06-10';
+
+19. select * from Salespeople s where exists(select 1 from Customers c where c.SNUM = s.SNUM and RATING = 300);
+
+20. select * from Customers c1 where exists(select 1 from Customers c2 where c1.RATING = c2.RATING and c1.CNUM <> c2.CNUM);
+
+21. select CNUM, CNAME, c.CITY, RATING, c.SNUM from Customers c join Salespeople s on s.SNUM = c.SNUM and c.CNUM >=1000 and s.SNAME = 'Serres';
+
+22. select concat(round(COMM*100, 4), '%') COMM_PERCENT from Salespeople;
+
+23. select SNAME, ODATE, max(AMT) from Salespeople s join Orders o on s.SNUM = o.SNUM group by SNAME, ODATE having max(AMT)>3000;
+
+24. 
+
+25. select * from Customers where CITY in (select CITY from Salespeople where SNUM = 1002);
+
+26. select * from Customers where RATING >= 200;
+
+27. select count(SNUM) from Orders;
+
+28. select * from (select SNUM, COMM from Salespeople where COMM>=0.12) s join Customers c on s.SNUM = c.SNUM;
+
+29. 
+
+30. select s.SNUM, SNAME, s.CITY, COMM, CNUM, CNAME from Salespeople s join Customers c on s.SNUM = c.SNUM where s.CITY = c.CITY;
+
+31. select * from Salespeople where SNAME like 'P__l%';
+
+32. select ONUM from Customers c join Orders o on c.SNUM = o.SNUM where c.CITY = 'Cisneros';
+
+33. select s.SNAME, max(o.AMT) from Salespeople s join Orders o on s.SNUM = o.SNUM where SNAME in ('Serres', 'Rifkin') group by s.SNAME;
+
+34. select SNUM, SNAME, COMM, CITY from Salespeople;
+
+35. select * from Salespeople where SNAME between 'A%' and 'G%'; 
+
+36. select c1.CNAME, c2.CNAME from Customers c1, Customers c2 where c1.CNAME<c2.CNAME;
+
+37. select * from Orders where AMT>(select avg(AMT) from Orders where ODATE = '1996-04-10' group by ODATE);
+
+38. 
+
+39. select ODATE, count(ONUM) Order_COUNT from Orders group by ODATE order by count(ONUM) desc;
+
+40. select rating, cname from Customers where CITY = 'San Jose';
+
+41. select CNAME, RATING from Customers where CITY = 'San Jose';
+
+42. select * from Orders where AMT > (select avg(AMT) from Orders);
+
+43. select CITY, max(RATING) from Customers group by CITY;
+
+44. select * from Salespeople s join Customers c on s.SNUM = c.SNUM where RATING > 100;
+
+45. select count(CNUM) from Customers where RATING>(select avg(RATING) from Customers where CITY = 'San Jose' group by CITY);
+
+46. select s1.sname, s2.sname from salespeople s1, salespeople s2;
+
+47. select * from Salespeople where CITY in ('Barcelona', 'London');
+
+48. 
+
+49. 
+
+50. select * from Orders where AMT>1000;
+
+51. select o.ONUM, c.CNAME from Orders o join Customers c on o.CNUM = c.CNUM;
+
+52. 
+
+53. select * from Customers c join Salespeople s on s.SNUM = c.SNUM where exists (select RATING from Customers where s.SNAME = 'Serres') < RATING;
+
+54. 1) select * from Orders where ODATE in ('1996-03-10','1996-04-10');
+
+    2) select * from Orders where ODATE = '1996-03-10' or ODATE = '1996-04-10';
+
+55. 
+
+56. select * from Customers where exists(select RATING from Customers where CITY = 'Rome')<RATING;
+
+57. select * from Customers where RATING > 100 or CITY = 'Rome';
+
+58. select * from Customers c join Salespeople s on s.SNUM = c.SNUM where s.SNUM = 1001;
+
+59. select s.SNAME, sum(AMT) from Orders o join Salespeople s on o.SNUM = s.SNUM where (select max(AMT) from Orders) group by s.SNAME;
+
+60. select * from Orders where AMT = 0 and AMT is null;
+
+61. select sname, cname from salespeople s, customers c where s.snum = c.snum and rating<200 and sname<cname;
+
+65. select cname, rating from Customers where cnum in(select cnum from Orders group by cnum having avg(AMT)>(select avg(amt) from Orders));
+
+66. select sum(AMT) from Orders;
+
+67. select ONUM, AMT, ODATE from Orders;
+
+68. select count(RATING) from Customers;
+
+69. select ONUM, SNAME, CNAME from Salespeople s, Orders o, Customers c where o.SNUM = s.SNUM and s.SNUM = c.SNUM and o.CNUM = c.CNUM;
+
+70. 
+
+71. select s.SNUM from Salespeople s join Customers c on s.SNUM = c.SNUM where s.CITY <> c.CITY;
+
+select SNUM, SNAME from Salespeople s where not exists any(select 1 from Customers c where s.CITY<>c.CITY);
+
+SELECT * FROM Salespeople s WHERE NOT EXISTS (SELECT 1 FROM Customers c WHERE c.City = s.City);
+
+72. select * from Salespeople s where exists (select 1 from Customers c where s.CITY = c.CITY);
+
+73. select * from Customers c join Salespeople s where s.SNAME in ('Peel', 'Monika');
+
+74. select ODATE, count(distinct s.SNUM) from Salespeople s join Orders o on s.SNUM = o.SNUM group by ODATE;
+
+75. 
+
+76. select * from Orders o where not exists ( select 1 from Customers c join Salespeople s on s.SNUM=c.SNUM where o.SNUM = s.SNUM and c.CITY = s.CITY);
+
+77.  
+
+78. select * from Salespeople s join Customers
+
+80. select concat('for the city ', CITY, ' the highest rating is ', max(RATING)) from Customers group by CITY;
+
+81. 
+
+98. 
+
+100. 
+
+111. 
+
+112. select * from Customers c1 where RATING = any(select RATING from Customers c2 where c1.CNUM<c2.CNUM);
+
+113. select * from Orders where AMT>(select avg(AMT) from Orders group by ODATE having ODATE = '1996-04-10');
+
+114. select * from Customers c join Orders o on c.CNUM = o.CNUM where AMT>(select avg(AMT) from Orders);	
+
+115. select * from Customers where RATING>(select avg(RATING) from Customers group by CITY having CITY = 'San Jose');
+
+116. 
+
+117.
+
+118.
+
+119.
+
+120.
+
+121.
+
+122.
+
+123.
+
+124.
+
+125.
+
+
+

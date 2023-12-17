@@ -1,0 +1,19 @@
+1. select eid, ename from emp where salary between 500 and 1300;
+
+2. select emp.eid, emp.ename, emp.salary, dept.deptname from emp join dept where dept.deptname = 'HR';
+
+3. select deptname, count(eid) employee_count from emp e right join dept d on e.deptid = d.deptid group by d.deptname;
+
+4. select ename, deptname, salary from emp e join dept d on e.deptid = d.deptid order by salary desc limit 1;
+
+5. select ename, deptname, salary from emp e join dept d on e.deptid = d.deptid order by salary limit 1;
+
+6. select ename, deptname, salary from emp e join dept d on e.deptid = d.deptid order by salary desc limit 1 offset 1;
+
+7.  Select ename,deptname,salary From emp e join dept d On e.deptid=d.deptid Order by salary desc limit 5;
+
+8. select * from (select ename,deptname,salary,dense_rank() over(partition by deptname order by salary desc) rn from emp e join dept d on e.deptid=d.deptid) as t where rn<=5;
+
+9. select deptname, avg(salary) from emp e join dept d on e.deptid = d.deptid group by d.deptname;
+
+10. select deptname, min(salary), max(salary) from emp e join dept d on e.deptid = d.deptid group by d.deptname;

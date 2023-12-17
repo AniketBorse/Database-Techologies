@@ -1,0 +1,65 @@
+Assignment Nov 19
+
+1. select WORKER_ID, FIRST_NAME, LAST_NAME, SALARY 
+   from Worker 
+   order by SALARY desc limit 1 offset 4;
+
+2. select * 
+   from (select WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT, rank() over(order by SALARY desc) rn from Worker) as Fifth_Highest 
+   where rn = 5;
+
+3. select * 
+   from Worker w1 
+   where exists (select 1 from Worker w2 where w1.SALARY = w2.SALARY and w1.WORKER_ID != w2.WORKER_ID);
+
+4. select * 
+   from Worker 
+   union all 
+   select * 
+   from Worker 
+   order by WORKER_ID;
+
+5. select * 
+   from Worker 
+   where exists(select round(count(*)/2)+1 from Worker);
+
+6. select DEPARTMENT, count(WORKER_ID) 
+   from Worker 
+   group by DEPARTMENT 
+   having count(WORKER_ID)<5;
+
+7. select DEPARTMENT, count(WORKER_ID) 
+   from Worker 
+   group by DEPARTMENT;
+
+8. select * 
+   from Worker 
+   order by WORKER_ID desc limit 1;
+
+9. select * 
+   from Worker 
+   order by WORKER_ID limit 1;
+
+10. select * 
+    from Worker 
+    order by WORKER_ID desc limit 5;
+
+11. select * 
+    from (select WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, DEPARTMENT, rank() over (partition by DEPARTMENT order by SALARY desc) rn from Worker) w1 
+    where w1.rn = 1;
+
+12. select * 
+    from Worker 
+    order by SALARY desc limit 3;
+
+13. select * 
+    from Worker  
+    order by SALARY limit 3;
+
+14. select * 
+    from Worker 
+    order by SALARY limit 1 offset 3;
+
+15. select DEPARTMENT, sum(SALARY) 
+    from Worker 
+    group by DEPARTMENT;

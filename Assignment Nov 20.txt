@@ -1,0 +1,41 @@
+Assignment Nov 20
+
+1. select FIRST_NAME as WORKER_NAME from Worker;
+
+2. select upper(FIRST_NAME) from Worker;
+
+3. select distinct(DEPARTMENT) from Worker;
+
+4. select concat(FIRST_NAME, ' ', LAST_NAME) as COMPLETE_NAME from Worker;
+
+5. select * from Worker order by FIRST_NAME;
+
+6. select * from Worker order by DEPARTMENT desc, FIRST_NAME;
+
+7. select * from Worker where FIRST_NAME in ('Vipul', 'Satish');
+
+8. select * from Worker where FIRST_NAME not in ('Vipul', 'Satish');
+
+9. select * from Worker where DEPARTMENT = 'Admin';
+
+10. select * from Worker where FIRST_NAME like '%a%';
+
+11.  select * from Worker where FIRST_NAME like '%a'; 
+
+12. select * from Worker where FIRST_NAME like '_____h';
+
+13. select * from Worker where SALARY between 100000 and 500000;
+
+14. select * from Worker where JOINING_DATE like'2014-02%';
+
+15. select DEPARTMENT, count(*) from Worker group by DEPARTMENT having DEPARTMENT = 'Admin';
+
+16. select FIRST_NAME, LAST_NAME from Worker where SALARY >= 50000 and SALARY <= 100000;
+
+17. select DEPARTMENT, count(WORKER_ID) from Worker group by DEPARTMENT order by DEPARTMENT desc;
+
+18. select * from (select  WORKER_ID, FIRST_NAME, LAST_NAME,WORKER_TITLE, SALARY, JOINING_DATE, DEPARTMENT from Worker join Title on Worker.WORKER_ID = Title.WORKER_REF_ID) W1 where WORKER_TITLE = 'Manager';
+
+19. select JOINING_DATE, count(*) from Worker group by JOINING_DATE having count(*) > 1;
+
+20. select * from Worker where WORKER_ID%2 <> 0;
